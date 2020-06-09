@@ -7,6 +7,7 @@
 #
 # Includes contents of the file cupti.h and subject to the same copyright license
 
+from __future__ import division
 from .types import *
 from .constants import *
 
@@ -108,7 +109,7 @@ def cuptiDeviceEnumMetrics(device, numMetrics):
     r = _cuptiDeviceEnumMetrics(device, ctypes.byref(sz), metrics)
 
     if r == CUPTI_SUCCESS:
-        return metrics[:sz.value/ctypes.sizeof(ctypes.c_int)]
+        return metrics[:sz.value//ctypes.sizeof(ctypes.c_int)]
     else:
         raise CUPTIError(r)
 
